@@ -305,7 +305,7 @@ $(
 					 for(var h=0;h<questions.length;i++) {
 						 var q = questions[h];
 						 if(q.no == selection.qnsNo) {
-							 questions = q;
+							 question = q;
 							 break;
 						 }
 					 }

@@ -300,7 +300,7 @@ $(
 				 
 				 for(var i=0;i<selections.length;i++) {
 					 var selection = selections[i];
-				     var question = "null";
+				     var question = null;
 					 
 					 for(var h=0;h<questions.length;i++) {
 						 var q = questions[h];

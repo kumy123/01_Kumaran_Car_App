@@ -300,12 +300,12 @@ $(
 				 
 				 for(var i=0;i<selections.length;i++) {
 					 var selection = selections[i];
-				     var question = null;
+				     var question = "null";
 					 
 					 for(var h=0;h<questions.length;i++) {
 						 var q = questions[h];
 						 if(q.no == selection.qnsNo) {
-							 question = q;
+							 questions = q;
 							 break;
 						 }
 					 }
@@ -319,8 +319,7 @@ $(
 					 }
 					 
 					 var percScore = (totalMarks / totalMarks) *100;
-					 var failed = true;
-					 
+					 var failed = true; 
 					 if(percScore > 50)
 						 {
 							 failed = false;
@@ -345,7 +344,7 @@ $(
 					 var myresult = $("#myresult");
 					 myresult.css("display","block");
 					 myresult.html(result);
-				 }
+					 
 					 var closeResultButton = $("#closeResultButton");
 					 closeResultButton.click(function() {
 						 $.fancybox.close();
@@ -393,7 +392,7 @@ $(
 					 });
 				 }
 			 }
-	     		 
+	     }		 
 	 function ansBox_click(selectedChoice) {
 		 var optA =$("#optionA");
 		 var optB =$("#optionB");

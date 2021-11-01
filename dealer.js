@@ -310,15 +310,17 @@ $(
 						 }
 					 }
 					 if(selection.selected == question.correctAns) {
-						 totalScore += parseInt(q.points);
+						 totalScore += parseInt(questions.points);
 					 }
 					 var totalMarks = 0;
 					 for(var h=0;h<questions.length;h++) {
 						 var q =question[h];
-						 totalMarks += parseInt(q.points);
+						 totalMarks += parseInt(questions.points);
 					 }
 					 
 					 var percScore = (totalMarks / totalMarks) *100;
+					 var failed = true;
+					 
 					 if(percScore > 50)
 						 {
 							 failed = false;
@@ -343,7 +345,7 @@ $(
 					 var myresult = $("#myresult");
 					 myresult.css("display","block");
 					 myresult.html(result);
-					 
+				 }
 					 var closeResultButton = $("#closeResultButton");
 					 closeResultButton.click(function() {
 						 $.fancybox.close();
@@ -391,7 +393,7 @@ $(
 					 });
 				 }
 			 }
-	     }		 
+	     		 
 	 function ansBox_click(selectedChoice) {
 		 var optA =$("#optionA");
 		 var optB =$("#optionB");

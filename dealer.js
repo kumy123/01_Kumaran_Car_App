@@ -7,6 +7,36 @@ var cars_sold = 0;
 var amount = 0;
 var brandcost = new Array(72500, 23930, 31260, 43990);
 
+var questions = [
+	{
+	"qns":"___ you happy today?",
+	"no" : "1",
+	"correctAns": "c",
+	"points" : "2",
+	"choices" : [{
+		  "title": "at",
+		  "no" : "a" 
+		},
+		{
+		   "title": "was",
+		   "no" : "b" 
+		},
+		{
+		    "title": "are",
+		    "no" : "c" 
+		},
+		{
+		     "title": "were",
+		     "no" : "d" 
+		}
+	  ]
+    },
+	
+];
+var qnsIndex = 0;
+var selections = [];
+var currentClient = null;
+
 
 function newClient(){
 	var preference = Math.floor((Math.random()*4));
@@ -60,6 +90,11 @@ function makeCarBoxesDroppable(brand) {
 						 
 						 count--;
 						 $dragBox.addClass('selected');
+						 
+						 currentClient = $dragBox;
+						 next_qns();
+						 var dialogOptions = { scrolling: 'no'};
+						 $.fancybox.open('#mcq' , dialogOptions);
 					 }
 	              };
 	$carBoxes.droppable(options);
@@ -147,12 +182,12 @@ function showCashierDialog(dragClient) {
 						  cars_sold += 1;
 						  amount += calcost(dragClient);
 						  update();
-						  removeBox(dragClient, -235);
+						  removeBox(dragClient, -210);
 						   $( this ).dialog( "close" );
 					   },
 					   
 					   "No and Exit": function() {
-						   removeBox(dragClient, -250);
+						   removeBox(dragClient, -210);
 						   $(this ).dialog( "close" );
 					   }
 				   },
@@ -225,4 +260,166 @@ $(
 			 currentPage.css(hideStyle);
 			 currentPage.hide();
 		 })
+		 
+	 }
+   function next_qns() {
+	         if(qnsIndex < questions.length) {
+			 var current = questions[qnsIndex];
+			 var questionTitle = $("#questionTitle");
+			 questionTitle.html((qnsIndex+1) + "." + current.qns);
+			 
+			 var optA = current.choices[0];
+			 var optA_Box = $("#optionA");
+			 optA_Box.html(optA.title);
+			 
+			 var optB = current.choices[1];
+			 var optB_Box = $("#optionB");
+			 optB_Box.html(optB.title);
+			 
+			 var optC = current.choices[2];
+			 var optC_Box = $("#optionC");
+			 optC_Box.html(optC.title);
+			 
+			 var optD = current.choices[3];
+			 var optD_Box = $("#optionD");
+			 optD_Box.html(optD.title);
+	   
+	         var optA = $("#optionA");
+	         var optB = $("#optionB");
+	         var optC = $("#optionC");
+	         var optD = $("#optionD");
+	         optA.css("background-color" , "palegreen");
+	         optB.css("background-color" , "palegreen");
+	         optC.css("background-color" , "palegreen");
+	         optD.css("background-color" , "palegreen");
+	         qnsIndex++;
+			 }
+			 else {
+				 qnsIndex = 0;
+				 var totalScore = 0;
+				 
+				 for(var i=0;i<selections.length;i++) {
+					 var selection = selections[i];
+				     var question = null;
+					 
+					 for(var h=0;h<questions.length;i++) {
+						 var q = questions[h];
+						 if(q.no == selection.qnsNo) {
+							 question = q;
+							 break;
+						 }
+					 }
+					 if(selection.selected == question.correctAns) {
+						 totalScore += parseInt(q.points);
+					 }
+					 var totalMarks = 0;
+					 for(var h=0;h<questions.length;h++) {
+						 var q =question[h];
+						 totalMarks += parseInt(q.points);
+					 }
+					 
+					 var percScore = (totalMarks / totalMarks) *100;
+					 if(percScore > 50)
+						 {
+							 failed = false;
+						 }
+					 var questionPanel = $("#question-panel");
+					 questionPanel.css("display","none");
+					 
+					 var resultPanel = $("#result-panel");
+					 resultPanel.css("display","block");
+					 
+					 var scoreBox = $("#totalScore");
+					 scoreBox.html("Score: " + totalScore + "/" + totalMarks);
+					 
+					 var result = "";
+					 if(failed == true)
+						 {
+							 result = '<img src="images/tenor.gif" width="250" height="200" alt="ex"/>'
+						 }
+					 else {
+						 result = '<img src="images/excellent.png" width="250" height="200" alt="ex"/></center>Excellent!';
+					 }
+					 var myresult = $("#myresult");
+					 myresult.css("display","block");
+					 myresult.html(result);
+					 
+					 var closeResultButton = $("#closeResultButton");
+					 closeResultButton.click(function() {
+						 $.fancybox.close();
+						 selections = [];
+						 
+						 questionPanel.css("display","block");
+						 resultPanel.css("display", "none");
+						 
+						 var clientX = currentClient.offset().left;
+						 var clientY = currentClient.offset().top;
+						 
+						 if(failed == true) {
+							 var exit = $("#exit_img_holder");
+							 var exitX = exit.offset().left;
+							 var exitY = exit.offset().top;
+							 
+							 var diffX = exitX - clientX;
+							  var diffY = exitY - clientY;
+							 
+							 currentClient.css('zIndex' , 3000)
+							 currentClient.animate( {
+								 left: "+=" + diffX,
+								 top: "+=" + diffY
+							 }, 1000).fadeOut(2000,function() { });
+						 }
+						 else {
+							 var cashier = $("#cashier_img_holder");
+							 var cashierX = cashier.offset().left;
+							 var cashierY = cashier.offset().top;
+							 
+							 var diffX = cashierX - clientX;
+							 var diffY = cashierY - clientY;
+							 
+							 currentClient.css("zIndex",3000);
+							 currentClient.animate(
+							 {
+								 left: "+=" + diffX,
+								 top: "+=" + diffY
+							 },
+							 1000, function() {
+								 showCashierDialog(currentClient);
+							 });
+						 }
+						 closeResultButton.unbind();
+					 });
+				 }
+			 }
+	     }		 
+	 function ansBox_click(selectedChoice) {
+		 var optA =$("#optionA");
+		 var optB =$("#optionB");
+		 var optC =$("#optionC");
+		 var optD =$("#optionD");
+		 optA.css("background-color" , "palegreen");
+	     optB.css("background-color" , "palegreen");
+	     optC.css("background-color" , "palegreen");
+	     optD.css("background-color" , "palegreen");
+		 
+		 if(selectedChoice == "a")
+			 {
+				 optA.css("background-color","khaki");
+			 }
+		 else if(selectedChoice == "b")
+			 {
+				 optB.css("background-color","khaki");
+			 }
+		 else if(selectedChoice == "c")
+			 {
+				 optC.css("background-color","khaki");
+			 }
+		 else
+			 {
+				 optD.css("background-color","khaki");
+			 }
+		 var selection = {"qnsNo" : qnsIndex,
+						  "selected" : selectedChoice,"qnsType" : "mcq"
+						 };
+		 selections.push(selection);
 	 }

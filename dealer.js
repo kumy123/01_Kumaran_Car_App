@@ -332,7 +332,7 @@ $(
 							 break;
 						 }
 					 }
-					 if(selection.selected == question.correctAns) {
+					 if(selection.selected == questions.correctAns) {
 						 totalScore += parseInt(question.points);
 					 }
 					 var totalMarks = 0;
@@ -367,7 +367,7 @@ $(
 					 var myresult = $("#myresult");
 					 myresult.css("display","block");
 					 myresult.html(result);
-				}	 
+					 
 					 var closeResultButton = $("#closeResultButton");
 					 closeResultButton.click(function() {
 						 $.fancybox.close();
@@ -413,7 +413,7 @@ $(
 						 }
 						 closeResultButton.unbind();
 					 });
-				 
+				 }
 			 }
 	     }		 
 	 function ansBox_click(selectedChoice) {

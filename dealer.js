@@ -325,7 +325,7 @@ $(
 					 var selection = selections[i];
 				     var question = null;
 					 
-					 for(var h=0;h<questions.length;i++) {
+					 for(var h=0;h<questions.length;h++) {
 						 var q = questions[h];
 						 if(q.no == selection.qnsNo) {
 							 question = q;
@@ -337,8 +337,8 @@ $(
 					 }
 					 var totalMarks = 0;
 					 for(var h=0;h<questions.length;h++) {
-						 var q =question[h];
-						 totalMarks += parseInt(question.points);
+						 var q =questions[h];
+						 totalMarks += parseInt(q.points);
 					 }
 					 
 					 var percScore = (totalMarks / totalMarks) *100;

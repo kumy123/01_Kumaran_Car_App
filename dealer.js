@@ -31,6 +31,29 @@ var questions = [
 		}
 	  ]
     },
+	{
+	"qns":"___ you sad today?",
+	"no" : "1",
+	"correctAns": "c",
+	"points" : "2",
+	"choices" : [{
+		  "title": "at",
+		  "no" : "a" 
+		},
+		{
+		   "title": "was",
+		   "no" : "b" 
+		},
+		{
+		    "title": "are",
+		    "no" : "c" 
+		},
+		{
+		     "title": "were",
+		     "no" : "d" 
+		}
+	  ]
+    },
 	
 ];
 var qnsIndex = 0;

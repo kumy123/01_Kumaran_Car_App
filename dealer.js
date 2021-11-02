@@ -310,12 +310,12 @@ $(
 						 }
 					 }
 					 if(selection.selected == question.correctAns) {
-						 totalScore += parseInt(questions.points);
+						 totalScore += parseInt(question.points);
 					 }
 					 var totalMarks = 0;
 					 for(var h=0;h<questions.length;h++) {
 						 var q =question[h];
-						 totalMarks += parseInt(questions.points);
+						 totalMarks += parseInt(question.points);
 					 }
 					 
 					 var percScore = (totalMarks / totalMarks) *100;
@@ -336,7 +336,7 @@ $(
 					 var result = "";
 					 if(failed == true)
 						 {
-							 result = '<img src="images/tenor.gif" width="250" height="200" alt="ex"/>'
+							 result = '<img src="images/tenor.gif" width="250" height="200" alt="ex"/>';
 						 }
 					 else {
 						 result = '<img src="images/excellent.png" width="250" height="200" alt="ex"/></center>Excellent!';

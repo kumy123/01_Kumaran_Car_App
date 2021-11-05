@@ -311,10 +311,10 @@ $(
 	         var optB = $("#optionB");
 	         var optC = $("#optionC");
 	         var optD = $("#optionD");
-	         optA.css("background-color" , "palegreen");
-	         optB.css("background-color" , "palegreen");
-	         optC.css("background-color" , "palegreen");
-	         optD.css("background-color" , "palegreen");
+	         optA.css("background-color" , "yellow");
+	         optB.css("background-color" , "yellow");
+	         optC.css("background-color" , "yellow");
+	         optD.css("background-color" , "yellow");
 	         qnsIndex++;
 			 }
 			 else {
@@ -428,19 +428,19 @@ $(
 		 
 		 if(selectedChoice == "a")
 			 {
-				 optA.css("background-color","khaki");
+				 optA.css("background-color","blue");
 			 }
 		 else if(selectedChoice == "b")
 			 {
-				 optB.css("background-color","khaki");
+				 optB.css("background-color","blue");
 			 }
 		 else if(selectedChoice == "c")
 			 {
-				 optC.css("background-color","khaki");
+				 optC.css("background-color","blue");
 			 }
 		 else
 			 {
-				 optD.css("background-color","khaki");
+				 optD.css("background-color","blue");
 			 }
 		 var selection = {"qnsNo" : qnsIndex,
 						  "selected" : selectedChoice,"qnsType" : "mcq"

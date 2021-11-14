@@ -6,10 +6,6 @@ var clients_served = 0;
 var cars_sold = 0;
 var amount = 0;
 var brandcost = new Array(72500, 23930, 31260, 43990);
-
-
-var qnsIndex = 0;
-var selections = [];
 var currentClient = null;
 
 
